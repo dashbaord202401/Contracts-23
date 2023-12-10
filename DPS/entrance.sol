@@ -54,11 +54,13 @@ contract entrance is ERC20 {
     }
 
     mapping(address => User) userMap; // map address => user info
-    mapping(address =>Vehicle) userTransport; // maping of transport user
+    mapping(address => Vehicle) userTransport; // maping of transport user
     mapping(string => address) isLFA; // is log for address
+    mapping(string => address) userDocNumber; // mapping for user doc number
     mapping(address => bool) InsStatusMap; // status ins Service (f = n payed, t = payed)
     mapping(address => FineStruct[]) userFines; // mapping for user fines
     mapping(string => DriverDocStruct) DocSystem; // driver doc system massive
+    mapping(address => uint) PriceForIns; // price for ins user
 
     modifier notCompany() { // check for user not Bank || ins company
         require(userMap[msg.sender].role.bank != true // if user not bank and other company
@@ -141,4 +143,3 @@ contract entrance is ERC20 {
         _transfer(bankAdr, msg.sender, _value); // transfer token for user
     }    
 }
-    

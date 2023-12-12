@@ -52,9 +52,11 @@ contract DriverFunctions is PoliceFunctions {
         userMap[msg.sender].DriverDoc.validity = _string;// add string validity for docs user
     }
 
-     function removeFine(uint _index) internal { // internal def for del payed fine
-        for(uint i = _index; i < userFines[msg.sender].length - 1; i++) {
-            userFines[msg.sender][i].indexFine = userFines[msg.sender][i + 1].indexFine;
+    function removeFine(uint index) internal { // internal def for del payed fine
+        for(uint i = index; i < userFines[msg.sender].length - 1; i++) {
+        userFines[msg.sender][i] = userFines[msg.sender][i + 1];
+        userFines[msg.sender][i].indexFine--;
+        
         }
         userFines[msg.sender].pop();
     }
